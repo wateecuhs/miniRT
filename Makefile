@@ -7,38 +7,55 @@ OBJS				=	$(patsubst %.c, $(DIR_BUILD)%.o, $(SRCS))
 OBJS_TEST			=	$(patsubst %.c, $(DIR_BUILD)%.o, $(TEST))
 DEPS				=	$(patsubst %.c, $(DIR_BUILD)%.d, $(SRCS))
 DEPS_FLAGS			=	-MMD -MP
-BASE_CFLAGS			=	-g3 -Wall -Wextra -Werror
+BASE_CFLAGS			=	-g3 -Wall -Wextra #-Werror
 BASE_DEBUG_CFLAGS	=	-g3
 DEBUG_CLFAGS		=	$(BASE_DEBUG_CFLAGS) -fsanitize=address
 FLAGS				=	$(BASE_CFLAGS)
 RM					=	rm -rf
-AR					=	ar rcs
+
+MINILIBX_PATH		=	minilibx/
+MINILIBX_INCLUDES	=	$(MINILIBX_PATH)
+MINILIBX_L			=	-L $(MINILIBX_PATH) -l mlx
+MINILIBX_A			=	$(MINILIBX_PATH)libmlx.a
+MAKE_MINILIBX		=	$(MAKE) -C $(MINILIBX_PATH)
 
 DIR_INCS =\
-	includes/
-
+	includes/			\
+	$(MINILIBX_INCLUDES)
 INCLUDES =\
 	$(addprefix -I , $(DIR_INCS))
 
+LIBS = \
+	-lm	\
+	$(MINILIBX_L)	\
+	-lXext	\
+	-lX11
+
+DEPENDENCIES =\
+	$(MINILIBX_A)
 
 .PHONY:		all
 all:
+			$(MAKE_MINILIBX)
 			$(MAKE) $(NAME)
 
+test:	$(OBJS_TEST)
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJS_TEST) $(LIBS) -o $(NAME)	
 
 $(NAME):	$(OBJS)
-	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME) -lreadline
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) $(LIBS) -o $(NAME)
 
 .PHONY:	clean
 clean:
+			$(MAKE_MINILIBX) clean
 			$(RM) $(DIR_BUILD)
-	
+
 .PHONY:	fclean
 fclean:	clean
 			$(RM) $(NAME)
 
 .PHONY:	debug
-debug:	fclean
+debug:
 			$(MAKE) -j FLAGS="$(DEBUG_CLFAGS)"
 
 .PHONY:	re
