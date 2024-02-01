@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 10:58:52 by panger            #+#    #+#             */
-/*   Updated: 2024/01/31 14:40:33 by panger           ###   ########.fr       */
+/*   Created: 2023/12/02 12:58:57 by panger            #+#    #+#             */
+/*   Updated: 2024/02/01 12:47:57 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	main(int argc, char **argv)
+void	error_msg(char *string)
 {
-	if (argc < 2)
-		return (1);
-	if (parsing_hub(argc - 1, &argv[1]) == -1)
-	{
-		write(2, "Error\n", 7);
-		return (1);
-	}
-	return (0);
+	if (!string)
+		perror("minishell");
+	else
+		perror(string);
+	exit(EXIT_FAILURE);
+}
+
+void	perror_prefix(char *string)
+{
+	write(2, "minishell: ", 11);
+	if (!string || ft_strcmp(string, "") == 0)
+		perror(" ");
+	else
+		perror(string);
 }

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 10:58:52 by panger            #+#    #+#             */
-/*   Updated: 2024/01/31 14:40:33 by panger           ###   ########.fr       */
+/*   Created: 2024/02/01 12:34:21 by panger            #+#    #+#             */
+/*   Updated: 2024/02/01 12:37:45 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(char *str)
 {
-	if (argc < 2)
-		return (1);
-	if (parsing_hub(argc - 1, &argv[1]) == -1)
-	{
-		write(2, "Error\n", 7);
-		return (1);
-	}
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
