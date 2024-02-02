@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/01 13:00:06 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/02 14:12:28 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	parsing_hub(int argc, char **argv)
 	fd = get_file(argv[0]);
 	if (fd == -1)
 		return (-1);
+	parse_lines(fd);
 	return (0);
 }
 
@@ -42,46 +43,52 @@ int	get_file(char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 		perror(file_path);
-	parse_lines(fd);
 	return (fd);
 }
 
-int	redirect_line(char *str)
+int	redirect_line(char *str, t_scene *scene)
 {
 	size_t	i;
 	int		identifier;
+	char	**line_tab;
 
-	i = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	identifier = ft_strchr(&str[i], ' ');
-	if (identifier == -1)
+	line_tab = ft_split(str, " ");
+	if (!line_tab)
 		return (-1);
-	if (ft_strncmp(&str[i], "A", identifier) == 0)
-		return (1); //redirect towards ambient light line parser
-	else if (ft_strncmp(&str[i], "C", identifier) == 0)
-		return (2); //redirect towards camera line parser
-	else if (ft_strncmp(&str[i], "L", identifier) == 0)
-		return (3); //redirect towards light line parser
-	else if (ft_strncmp(&str[i], "sp", identifier) == 0)
-		return (4); //redirect towards sphere line parser
-	else if (ft_strncmp(&str[i], "pl", identifier) == 0)
-		return (5); //redirect towards plane line parser
-	else if (ft_strncmp(&str[i], "cy", identifier) == 0)
-		return (5); //redirect towards cylinder line parser
+	if (ft_strcmp(line_tab[0], "A") == 0)
+	{
+		scene->ambient_light = ambient_identifier(line_tab);
+		printf("%p\n", scene->ambient_light);
+	}
+	else if (ft_strcmp(line_tab[0], "C") == 0)
+		return (free_arr(line_tab), 2); //redirect towards camera line parser
+	else if (ft_strcmp(line_tab[0], "L") == 0)
+		scene->light = light_identifier(line_tab);
+	else if (ft_strcmp(line_tab[0], "sp") == 0)
+		return (free_arr(line_tab), 4); //redirect towards sphere line parser
+	else if (ft_strcmp(line_tab[0], "pl") == 0)
+		return (free_arr(line_tab), 5); //redirect towards plane line parser
+	else if (ft_strcmp(line_tab[0], "cy") == 0)
+		return (free_arr(line_tab), 6); //redirect towards cylinder line parser
 	else
-		return (-1); // return null value
+		return (free_arr(line_tab), -1); // return null value
+	free_arr(line_tab);
 }
 
 int	parse_lines(int fd)
 {
 	char	*line;
+	t_scene	*scene;
 
+	scene = init_scene();
+	printf("%p\n", scene);
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("%d\n", redirect_line(line));
+		if (ft_strcmp(line, "\n") != 0)
+			redirect_line(line, scene);
 		free(line);
 		line = get_next_line(fd);
 	}
+	free_scene(scene);
 }

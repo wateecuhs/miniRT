@@ -55,7 +55,7 @@ fclean:	clean
 			$(RM) $(NAME)
 
 .PHONY:	debug
-debug:
+debug:	fclean
 			$(MAKE) -j FLAGS="$(DEBUG_CLFAGS)"
 
 .PHONY:	re

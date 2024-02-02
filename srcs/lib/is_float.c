@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   is_float.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 12:58:57 by panger            #+#    #+#             */
-/*   Updated: 2024/02/02 11:32:55 by panger           ###   ########.fr       */
+/*   Created: 2024/02/02 13:04:59 by panger            #+#    #+#             */
+/*   Updated: 2024/02/02 13:36:14 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	perror_prefix(char *string)
+int	is_float(char *s)
 {
-	write(2, "miniRT: ", 8);
-	if (!string || ft_strcmp(string, "") == 0)
-		perror(" ");
-	else
-		perror(string);
+	int	i;
+
+	i = 0;
+	if (s[i] == '-')
+		i++;
+	if (!is_digit(s[i]))
+		return (0);
+	while (s[i] && is_digit(s[i]))
+		i++;
+	if (s[i] != '.')
+		return (0);
+	i++;
+	if (s[i] && is_digit(s[i]) && s[i + 1] == '\0')
+		return (1);
+	return (0);
 }

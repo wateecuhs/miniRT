@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   is_digit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 12:58:57 by panger            #+#    #+#             */
-/*   Updated: 2024/02/02 11:32:55 by panger           ###   ########.fr       */
+/*   Created: 2024/02/02 13:05:37 by panger            #+#    #+#             */
+/*   Updated: 2024/02/02 13:06:11 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	perror_prefix(char *string)
+int	is_digit(char c)
 {
-	write(2, "miniRT: ", 8);
-	if (!string || ft_strcmp(string, "") == 0)
-		perror(" ");
-	else
-		perror(string);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

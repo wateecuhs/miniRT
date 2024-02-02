@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 12:34:21 by panger            #+#    #+#             */
-/*   Updated: 2024/02/02 11:45:01 by panger           ###   ########.fr       */
+/*   Created: 2024/02/02 11:31:09 by panger            #+#    #+#             */
+/*   Updated: 2024/02/02 14:12:02 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-size_t	ft_strlen(char *str)
+void	free_arr(char **arr)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_arrlen(char **arr)
-{
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
-		i++;
-	return (i);
+		free(arr[i++]);
+	free(arr);
+}
+
+void	free_scene(t_scene *scene)
+{
+	printf("%p\n", scene->ambient_light);
+	if (scene->ambient_light)
+		free(scene->ambient_light);
+	if (scene->light)
+		free(scene->light);
+	if (scene->camera)
+		free(scene->camera);
+	if (scene->sphere)
+		free(scene->sphere);
+	if (scene->plane)
+		free(scene->plane);
+	if (scene->cylinder)
+		free(scene->cylinder);
+	free(scene);
 }
