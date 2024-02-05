@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:31:09 by panger            #+#    #+#             */
-/*   Updated: 2024/02/02 14:12:02 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 10:08:38 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_arr(char **arr)
 
 void	free_scene(t_scene *scene)
 {
-	printf("%p\n", scene->ambient_light);
 	if (scene->ambient_light)
 		free(scene->ambient_light);
 	if (scene->light)

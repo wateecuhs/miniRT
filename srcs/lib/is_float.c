@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:04:59 by panger            #+#    #+#             */
-/*   Updated: 2024/02/02 13:36:14 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 10:05:18 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	is_float(char *s)
 		return (0);
 	while (s[i] && is_digit(s[i]))
 		i++;
+	if (!s[i])
+		return (1);
 	if (s[i] != '.')
 		return (0);
 	i++;

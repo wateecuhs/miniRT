@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/02 14:10:37 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 10:49:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_camera
 {
 	t_coords	coords;
 	t_vectors	vectors;
+	__uint8_t	fov;
 }	t_camera;
 
 typedef struct s_light
@@ -112,7 +113,6 @@ size_t		ft_arrlen(char **arr);
 int			is_digit(char c);
 float		ft_atof(char *str);
 int			is_float(char *s);
-int			get_rgb(char *str, t_colors *ret);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 void		free_scene(t_scene *scene);
 
@@ -120,10 +120,20 @@ void		free_scene(t_scene *scene);
 int			parsing_hub(int argc, char **argv);
 t_ambient	*ambient_identifier(char **line);
 t_light		*light_identifier(char **line);
+t_camera	*camera_identifier(char **line);
+t_cylinder	*cylinder_identifier(char **line);
+t_plane		*plane_identifier(char **line);
+t_sphere	*sphere_identifier(char **line);
+int			get_vector(char *str, t_coords *ret);
+int			get_rgb(char *str, t_colors *ret);
+int			get_coords(char *str, t_coords *ret);
 
 // gnl
 char		*get_next_line(int fd);
 char		*ft_stradd(char *s1, char *s2, int size);
 char		*ft_strdupset(char const *s, int start, int stop);
+
+// tmp
+void	print_scene(t_scene *scene);
 
 #endif
