@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 10:49:12 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:22:36 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ float		ft_atof(char *str);
 int			is_float(char *s);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 void		free_scene(t_scene *scene);
+void		ft_cylinder_addback(t_cylinder **head, t_cylinder *new);
+void		ft_plane_addback(t_plane **head, t_plane *new);
+void		ft_sphere_addback(t_sphere **head, t_sphere *new);
 
 // parsing
 int			parsing_hub(int argc, char **argv);

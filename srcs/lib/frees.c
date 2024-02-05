@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:31:09 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 10:08:38 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:40:04 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,31 @@ void	free_arr(char **arr)
 
 void	free_scene(t_scene *scene)
 {
+	void	*tmp;
+
 	if (scene->ambient_light)
 		free(scene->ambient_light);
 	if (scene->light)
 		free(scene->light);
 	if (scene->camera)
 		free(scene->camera);
-	if (scene->sphere)
+	while (scene->sphere)
+	{
+		tmp = scene->sphere->next;
 		free(scene->sphere);
-	if (scene->plane)
+		scene->sphere = tmp;
+	}
+	while (scene->plane)
+	{
+		tmp = scene->plane->next;
 		free(scene->plane);
-	if (scene->cylinder)
+		scene->plane = tmp;
+	}
+	while (scene->cylinder)
+	{
+		tmp = scene->cylinder->next;
 		free(scene->cylinder);
+		scene->cylinder = tmp;
+	}
 	free(scene);
 }

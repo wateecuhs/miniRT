@@ -18,7 +18,8 @@ SRCS_LIB		=	lib/ft_strcmp.c \
 					lib/frees.c \
 					lib/ft_substr.c \
 					lib/ft_split.c \
-					lib/ft_numbers.c
+					lib/ft_numbers.c \
+					lib/lst.c
 
 SRCS_GNL		=	get_next_line/get_next_line_utils.c \
 					get_next_line/get_next_line.c

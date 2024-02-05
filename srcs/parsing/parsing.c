@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 11:08:43 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:23:39 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	redirect_line(char *str, t_scene *scene)
 	else if (ft_strcmp(line_tab[0], "L") == 0)
 		scene->light = light_identifier(line_tab);
 	else if (ft_strcmp(line_tab[0], "sp") == 0)
-		scene->sphere = sphere_identifier(line_tab);
+		ft_sphere_addback(&(scene->sphere), sphere_identifier(line_tab));
 	else if (ft_strcmp(line_tab[0], "pl") == 0)
-		scene->plane = plane_identifier(line_tab);
+		ft_plane_addback(&(scene->plane), plane_identifier(line_tab));
 	else if (ft_strcmp(line_tab[0], "cy") == 0)
-		scene->cylinder = cylinder_identifier(line_tab);
+		ft_cylinder_addback(&(scene->cylinder), cylinder_identifier(line_tab));
 	else
 		return (free_arr(line_tab), -1);
 	free_arr(line_tab);

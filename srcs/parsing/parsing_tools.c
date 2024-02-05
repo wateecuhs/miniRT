@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:28:10 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 10:36:37 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:42:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	get_vector(char *str, t_coords *ret)
 	while (i < 3)
 	{
 		tmp = ft_atof(arr[i]);
-		if (tmp < 0 || tmp > 1)
+		if (tmp < -1 || tmp > 1)
 			return (free_arr(arr), 0);
 		if (i == 0)
 			ret->x = tmp;
