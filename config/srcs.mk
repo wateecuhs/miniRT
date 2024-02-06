@@ -1,7 +1,7 @@
 SRCS			=	miniRT.c $(SRCS_PARSING) $(SRCS_LIB) $(SRCS_GNL) $(SRCS_WINDOW) $(SRCS_TMP)
 
 SRCS_PARSING	=	parsing/parsing.c \
-					parsing/A_C_L_identifiers.c \
+					parsing/scene_identifiers.c \
 					parsing/objects_identifiers.c \
 					parsing/parsing_tools.c
 

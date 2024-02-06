@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 11:22:36 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:52:38 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,16 @@ void		free_scene(t_scene *scene);
 void		ft_cylinder_addback(t_cylinder **head, t_cylinder *new);
 void		ft_plane_addback(t_plane **head, t_plane *new);
 void		ft_sphere_addback(t_sphere **head, t_sphere *new);
+void		error_parsing(int error_status, size_t line, char *type);
 
 // parsing
 int			parsing_hub(int argc, char **argv);
-t_ambient	*ambient_identifier(char **line);
-t_light		*light_identifier(char **line);
-t_camera	*camera_identifier(char **line);
-t_cylinder	*cylinder_identifier(char **line);
-t_plane		*plane_identifier(char **line);
-t_sphere	*sphere_identifier(char **line);
+t_ambient	*ambient_identifier(char **line, int *error_status);
+t_light		*light_identifier(char **line, int *error_status);
+t_camera	*camera_identifier(char **line, int *error_status);
+t_cylinder	*cylinder_identifier(char **line, int *error_status);
+t_plane		*plane_identifier(char **line, int *error_status);
+t_sphere	*sphere_identifier(char **line, int *error_status);
 int			get_vector(char *str, t_coords *ret);
 int			get_rgb(char *str, t_colors *ret);
 int			get_coords(char *str, t_coords *ret);

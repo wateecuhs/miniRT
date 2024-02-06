@@ -6,14 +6,14 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 11:23:39 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:53:25 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 int	get_file(char *file_path);
-int	parse_lines(int fd);
+t_scene	*parse_lines(int fd);
 
 int	parsing_hub(int argc, char **argv)
 {
@@ -47,45 +47,52 @@ int	get_file(char *file_path)
 	return (fd);
 }
 
-int	redirect_line(char *str, t_scene *scene)
+int	redirect_line(char *str, t_scene *scene, size_t line)
 {
-	size_t	i;
-	int		identifier;
 	char	**line_tab;
+	int		error_status;
 
 	line_tab = ft_split(str, " ");
 	if (!line_tab)
 		return (-1);
 	if (ft_strcmp(line_tab[0], "A") == 0)
-		scene->ambient_light = ambient_identifier(line_tab);
+		scene->ambient_light = ambient_identifier(line_tab, &error_status);
 	else if (ft_strcmp(line_tab[0], "C") == 0)
-		scene->camera = camera_identifier(line_tab);
+		scene->camera = camera_identifier(line_tab, &error_status);
 	else if (ft_strcmp(line_tab[0], "L") == 0)
-		scene->light = light_identifier(line_tab);
+		scene->light = light_identifier(line_tab, &error_status);
 	else if (ft_strcmp(line_tab[0], "sp") == 0)
-		ft_sphere_addback(&(scene->sphere), sphere_identifier(line_tab));
+		ft_sphere_addback(&(scene->sphere), sphere_identifier(line_tab, &error_status));
 	else if (ft_strcmp(line_tab[0], "pl") == 0)
-		ft_plane_addback(&(scene->plane), plane_identifier(line_tab));
+		ft_plane_addback(&(scene->plane), plane_identifier(line_tab, &error_status));
 	else if (ft_strcmp(line_tab[0], "cy") == 0)
-		ft_cylinder_addback(&(scene->cylinder), cylinder_identifier(line_tab));
+		ft_cylinder_addback(&(scene->cylinder), cylinder_identifier(line_tab, &error_status));
 	else
 		return (free_arr(line_tab), -1);
-	free_arr(line_tab);
+	if (error_status != 0)
+		return (error_parsing(error_status, line, line_tab[0]), free_arr(line_tab), -1);
+	return (free_arr(line_tab), 0);
 }
 
-int	parse_lines(int fd)
+t_scene	*parse_lines(int fd)
 {
 	char	*line;
 	t_scene	*scene;
+	size_t	i;
 
 	scene = init_scene();
 	line = get_next_line(fd);
+	i = 0;
 	while (line)
 	{
 		if (ft_strcmp(line, "\n") != 0)
-			redirect_line(line, scene);
+		{
+			if (redirect_line(line, scene, i) == -1)
+				return (free_scene(scene), NULL);
+		}
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	print_scene(scene);
 	free_scene(scene);
