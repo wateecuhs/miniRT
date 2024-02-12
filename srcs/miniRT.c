@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:52 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 10:36:45 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:41:29 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int	main(int argc, char **argv)
 {
+	t_scene	*scene;
+
 	if (argc < 2)
 		return (1);
-	if (parsing_hub(argc - 1, &argv[1]) == -1)
-	{
-		write(2, "Error\n", 7);
+	scene = parsing_hub(argc - 1, &argv[1]);
+	if (!scene)
 		return (1);
-	}
+	init(scene);
 	return (0);
 }

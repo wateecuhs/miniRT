@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:28:10 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 13:04:11 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/09 13:02:35 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_rgb(char *str, t_colors *ret)
 	return (free_arr(arr), 1);
 }
 
-int	get_coords(char *str, t_coords *ret)
+int	get_coords(char *str, t_vectors *ret)
 {
 	int		tmp;
 	int		i;
@@ -67,9 +67,9 @@ int	get_coords(char *str, t_coords *ret)
 	return (free_arr(arr), 1);
 }
 
-int	get_vector(char *str, t_coords *ret)
+int	get_vector(char *str, t_vectors *ret)
 {
-	int		tmp;
+	float	tmp;
 	int		i;
 	char	**arr;
 

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/06 11:53:25 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/07 10:22:08 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 int	get_file(char *file_path);
 t_scene	*parse_lines(int fd);
 
-int	parsing_hub(int argc, char **argv)
+t_scene	*parsing_hub(int argc, char **argv)
 {
-	int	fd;
+	int		fd;
+	t_scene	*scene;
 
 	if (argc < 1)
-		return (-1);
+		return (NULL);
 	fd = get_file(argv[0]);
 	if (fd == -1)
-		return (-1);
-	parse_lines(fd);
-	return (0);
+		return (NULL);
+	scene = parse_lines(fd);
+	if (!scene)
+		return (NULL);
+	return (scene);
 }
 
 int	get_file(char *file_path)
@@ -81,6 +84,8 @@ t_scene	*parse_lines(int fd)
 	size_t	i;
 
 	scene = init_scene();
+	if (!scene)
+		return (NULL);
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
@@ -94,6 +99,5 @@ t_scene	*parse_lines(int fd)
 		line = get_next_line(fd);
 		i++;
 	}
-	print_scene(scene);
-	free_scene(scene);
+	return (scene);
 }
