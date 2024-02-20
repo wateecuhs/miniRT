@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:28:10 by panger            #+#    #+#             */
-/*   Updated: 2024/02/09 13:02:35 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:17:53 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	get_coords(char *str, t_vectors *ret)
 		return (-1);
 	if (ft_arrlen(arr) != 3 || !is_float(arr[0])
 		|| !is_float(arr[1]) || !is_float(arr[2]))
-		return (free_arr(arr), 0);
+		return (0);
 	i = 0;
 	while (i < 3)
 	{
@@ -69,7 +69,7 @@ int	get_coords(char *str, t_vectors *ret)
 
 int	get_vector(char *str, t_vectors *ret)
 {
-	float	tmp;
+	double	tmp;
 	int		i;
 	char	**arr;
 

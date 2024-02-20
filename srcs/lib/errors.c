@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 12:58:57 by panger            #+#    #+#             */
-/*   Updated: 2024/02/06 11:56:06 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/20 12:56:49 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	error_parsing(int error_status, size_t line, char *type)
 	{
 		write(2, "Line ", 5);
 		ft_putnbr(line + 1);
-		write(2, " of identifier '", 16);
+		write(2, ": identifier '", 14);
 		write(2, type, ft_strlen(type));
 		write(2, "' is invalid.\n", 14);
 	}

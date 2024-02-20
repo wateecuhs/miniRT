@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:55:04 by panger            #+#    #+#             */
-/*   Updated: 2024/02/06 11:55:31 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:00:10 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_ambient	*ambient_identifier(char **line, int *error_status)
 {
 	t_ambient	*ret;
-	float		tmp;
+	double		tmp;
 
 	*error_status = 0;
 	if (ft_arrlen(line) != 3 || !is_float(line[1]))
@@ -35,7 +35,7 @@ t_ambient	*ambient_identifier(char **line, int *error_status)
 t_light	*light_identifier(char **line, int *error_status)
 {
 	t_light	*ret;
-	float	tmp;
+	double	tmp;
 
 	*error_status = 0;
 	if (ft_arrlen(line) != 4 || !is_float(line[2]))

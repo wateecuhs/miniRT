@@ -6,16 +6,17 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/12 18:47:04 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/20 15:58:58 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define HEIGHT 512
-# define WIDTH 512
+# define HEIGHT 800
+# define WIDTH 800
 # define M_PI 3.14159265358979323846
+# define EPSILON 0.00001
 
 # include <fcntl.h>
 # include <string.h>
@@ -28,20 +29,20 @@
 
 typedef struct s_matrix
 {
-	float	matrix[4][4];
+	double	m[3][3];
 }	t_matrix;
 
 typedef struct s_pair
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_pair;
 
 typedef struct s_vectors
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vectors;
 
 typedef struct s_ray
@@ -60,7 +61,7 @@ typedef struct s_colors
 
 typedef struct s_ambient
 {
-	float		ratio;
+	double		ratio;
 	t_colors	color;
 }	t_ambient;
 
@@ -74,14 +75,14 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vectors	coords;
-	float		brightness;
+	double		brightness;
 	t_colors	color;
 }	t_light;
 
 typedef struct s_sphere
 {
 	t_vectors		coords;
-	float			diameter;
+	double			diameter;
 	t_colors		color;
 	struct s_sphere	*next;
 }	t_sphere;
@@ -98,8 +99,8 @@ typedef struct s_cylinder
 {
 	t_vectors			coords;
 	t_vectors			vectors;
-	float				diameter;
-	float				height;
+	double				diameter;
+	double				height;
 	t_colors			color;
 	struct s_cylinder	*next;
 }	t_cylinder;
@@ -140,12 +141,13 @@ void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
 
 // vectors
 void		normalize_vector(t_vectors *vector);
-t_vectors	add_coords_vectors(t_vectors coords, t_vectors vectors, float factor);
+t_vectors	add_coords_vectors(t_vectors coords, t_vectors vectors, double factor);
 t_vectors	multiply_vec_matrix(t_vectors p, t_matrix m);
-t_vectors	create_vector(float x, float y, float z);
+t_vectors	create_vector(double x, double y, double z);
 t_vectors	cross_product(t_vectors vec1, t_vectors vec2);
 t_vectors	substract(t_vectors vec1, t_vectors vec2);
 t_matrix	look_at(t_vectors origin, t_vectors cam_vector);
+double		vec_dot(t_vectors vec1, t_vectors vec2);
 
 // lib
 int			ft_strcmp(char *s1, char *s2);
@@ -160,7 +162,7 @@ void		free_arr(char **arr);
 char		**ft_split(char *s, char *c);
 size_t		ft_arrlen(char **arr);
 int			is_digit(char c);
-float		ft_atof(char *str);
+double		ft_atof(char *str);
 int			is_float(char *s);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 void		free_scene(t_scene *scene);
@@ -168,7 +170,7 @@ void		ft_cylinder_addback(t_cylinder **head, t_cylinder *new);
 void		ft_plane_addback(t_plane **head, t_plane *new);
 void		ft_sphere_addback(t_sphere **head, t_sphere *new);
 void		error_parsing(int error_status, size_t line, char *type);
-t_pair		assign_pair(float x, float y);
+t_pair		assign_pair(double x, double y);
 void		set_hooks(t_mlx *mlx);
 t_ray		ray_to_pixel(int x, int y, t_scene *scene);
 int			ft_atoi(const char *nptr);

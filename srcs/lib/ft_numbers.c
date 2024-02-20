@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:21:11 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 11:07:58 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:00:10 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	ft_atoi(const char *nptr)
 	return (tot * sign);
 }
 
-float	ft_atof(char *str)
+double	ft_atof(char *str)
 {
-	float	ret;
+	double	ret;
 	int		dot;
 	int		rest;
 
-	ret = (float)ft_atoi(str);
+	ret = (double)ft_atoi(str);
 	dot = ft_strchr(str, '.');
 	if (dot == -1)
 		return (ret);
 	rest = ft_atoi(&str[dot + 1]);
-	ret += (float)(rest * 0.1);
+	ret += (double)(rest * 0.1);
 	return (ret);
 }

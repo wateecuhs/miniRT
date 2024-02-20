@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:12:32 by panger            #+#    #+#             */
-/*   Updated: 2024/02/06 11:55:15 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:12:57 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_sphere	*sphere_identifier(char **line, int *error_status)
 {
 	t_sphere	*ret;
-	int			tmp;
 
 	*error_status = 0;
 	if (ft_arrlen(line) != 4 || !is_float(line[2]))
@@ -34,8 +33,7 @@ t_sphere	*sphere_identifier(char **line, int *error_status)
 
 t_plane	*plane_identifier(char **line, int *error_status)
 {
-	t_plane		*ret;
-	int			tmp;
+	t_plane	*ret;
 
 	*error_status = 0;
 	if (ft_arrlen(line) != 4)
@@ -56,7 +54,6 @@ t_plane	*plane_identifier(char **line, int *error_status)
 t_cylinder	*cylinder_identifier(char **line, int *error_status)
 {
 	t_cylinder	*ret;
-	int			tmp;
 
 	*error_status = 0;
 	if (ft_arrlen(line) != 6 || !is_float(line[3]) || !is_float(line[4]))
