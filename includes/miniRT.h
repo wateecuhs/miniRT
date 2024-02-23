@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/20 15:58:58 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:53:34 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,9 @@ t_vectors	cross_product(t_vectors vec1, t_vectors vec2);
 t_vectors	substract(t_vectors vec1, t_vectors vec2);
 t_matrix	look_at(t_vectors origin, t_vectors cam_vector);
 double		vec_dot(t_vectors vec1, t_vectors vec2);
+t_ray		create_ray(t_vectors origin, t_vectors direction);
+t_vectors	multiply_vector(t_vectors vec1, double factor);
+int			color_to_int(t_colors color);
 
 // lib
 int			ft_strcmp(char *s1, char *s2);
@@ -174,6 +177,9 @@ t_pair		assign_pair(double x, double y);
 void		set_hooks(t_mlx *mlx);
 t_ray		ray_to_pixel(int x, int y, t_scene *scene);
 int			ft_atoi(const char *nptr);
+t_colors	multiply_colors(t_colors color, t_colors new, double ratio);
+t_colors	add_ambient(t_colors color, t_ambient *ambient);
+t_colors	create_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
 
 // parsing
 t_scene		*parsing_hub(int argc, char **argv);

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:42:50 by panger            #+#    #+#             */
-/*   Updated: 2024/02/20 13:00:10 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/23 14:23:27 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,12 @@ t_vectors	substract(t_vectors vec1, t_vectors vec2)
 	return (result);
 }
 
+t_vectors	multiply_vector(t_vectors vec1, double factor)
+{
+	t_vectors result;
+
+	result.x = vec1.x * factor;
+	result.y = vec1.y * factor;
+	result.z = vec1.z * factor;
+	return (result);
+}

@@ -27,7 +27,8 @@ SRCS_LIB		=	lib/ft_strcmp.c \
 					lib/lst.c \
 					lib/ft_assign.c \
 					lib/vectors.c \
-					lib/vectors_operations.c
+					lib/vectors_operations.c \
+					lib/colors.c
 
 SRCS_GNL		=	get_next_line/get_next_line_utils.c \
 					get_next_line/get_next_line.c
