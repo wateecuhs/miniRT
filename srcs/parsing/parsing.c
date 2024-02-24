@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/20 13:08:24 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 13:54:31 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,7 @@ t_scene	*parse_lines(int fd)
 		if (ft_strcmp(line, "\n") != 0)
 		{
 			if (redirect_line(line, scene, i) == -1)
-			{
-				printf("hello\n");
 				return (free_scene(scene), NULL);
-			}
 		}
 		free(line);
 		line = get_next_line(fd);

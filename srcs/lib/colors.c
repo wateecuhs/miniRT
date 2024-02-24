@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:52:45 by panger            #+#    #+#             */
-/*   Updated: 2024/02/23 18:53:16 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 13:51:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,16 @@ int	color_to_int(t_colors color)
 	int	ret;
 
 	ret = color.a << 24 | color.r << 16 | color.g << 8 | color.b;
+	return (ret);
+}
+
+t_colors	assign_color(__uint32_t color)
+{
+	t_colors	ret;
+
+	ret.a = color >> 24;
+	ret.r = color >> 16;
+	ret.g = color >> 8;
+	ret.b = color >> 0;
 	return (ret);
 }

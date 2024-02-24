@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:34:27 by panger            #+#    #+#             */
-/*   Updated: 2024/02/23 13:02:40 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 13:53:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	render_image(t_mlx *mlx)
 	int			j;
 
 	i = 0;
-	while (i < HEIGHT)
+	while (i <= HEIGHT)
 	{
 		j = 0;
-		while (j < WIDTH)
+		while (j <= WIDTH)
 		{
 			render_pixel(mlx, j, i);
 			j++;

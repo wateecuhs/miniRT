@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/23 18:53:34 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 15:13:32 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_cylinder
 	double				height;
 	t_colors			color;
 	struct s_cylinder	*next;
+	t_vectors			normal;
 }	t_cylinder;
 
 typedef struct s_scene
@@ -151,6 +152,7 @@ double		vec_dot(t_vectors vec1, t_vectors vec2);
 t_ray		create_ray(t_vectors origin, t_vectors direction);
 t_vectors	multiply_vector(t_vectors vec1, double factor);
 int			color_to_int(t_colors color);
+double		vector_distance(t_vectors vec1, t_vectors vec2);
 
 // lib
 int			ft_strcmp(char *s1, char *s2);
@@ -180,6 +182,7 @@ int			ft_atoi(const char *nptr);
 t_colors	multiply_colors(t_colors color, t_colors new, double ratio);
 t_colors	add_ambient(t_colors color, t_ambient *ambient);
 t_colors	create_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
+t_colors	assign_color(__uint32_t color);
 
 // parsing
 t_scene		*parsing_hub(int argc, char **argv);

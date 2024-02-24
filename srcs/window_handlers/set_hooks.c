@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:37:17 by panger            #+#    #+#             */
-/*   Updated: 2024/02/09 13:22:36 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 16:18:58 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@ int	cross_close(t_mlx *mlx)
 	return (0);
 }
 
+int	on_mouse_down_hook(int button, int x, int y, t_mlx *param)
+{
+	printf("%d %d\n", x, y);
+	return (0);
+}
+
 void	set_hooks(t_mlx *mlx)
 {
 	mlx_hook(mlx->win, 17, 1L << 0, cross_close, mlx);
+	mlx_hook(mlx->win, 04, 1L << 2, on_mouse_down_hook, mlx);
 }
