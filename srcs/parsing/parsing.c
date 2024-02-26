@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/24 13:54:31 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:32:15 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ t_scene	*parsing_hub(int argc, char **argv)
 	scene = parse_lines(fd);
 	if (!scene)
 		return (NULL);
+	if (scene->ambient_light == NULL || scene->camera == NULL
+		|| scene->light == NULL)
+	{
+		write(2, "Scene must have at least one A, C and L identifier\n", 49);
+		return (free_scene(scene), NULL);
+	}
 	return (scene);
 }
 
@@ -58,11 +64,11 @@ int	redirect_line(char *str, t_scene *scene, size_t line)
 	line_tab = ft_split(str, " \t");
 	if (!line_tab)
 		return (-1);
-	if (ft_strcmp(line_tab[0], "A") == 0)
+	if (ft_strcmp(line_tab[0], "A") == 0 && scene->ambient_light == NULL)
 		scene->ambient_light = ambient_identifier(line_tab, &error_status);
-	else if (ft_strcmp(line_tab[0], "C") == 0)
+	else if (ft_strcmp(line_tab[0], "C") == 0 && scene->camera == NULL)
 		scene->camera = camera_identifier(line_tab, &error_status);
-	else if (ft_strcmp(line_tab[0], "L") == 0)
+	else if (ft_strcmp(line_tab[0], "L") == 0 && scene->light == NULL)
 		scene->light = light_identifier(line_tab, &error_status);
 	else if (ft_strcmp(line_tab[0], "sp") == 0)
 		ft_sphere_addback(&(scene->sphere), sphere_identifier(line_tab, &error_status));
@@ -71,7 +77,7 @@ int	redirect_line(char *str, t_scene *scene, size_t line)
 	else if (ft_strcmp(line_tab[0], "cy") == 0)
 		ft_cylinder_addback(&(scene->cylinder), cylinder_identifier(line_tab, &error_status));
 	else
-		return (free_arr(line_tab), -1);
+		return (error_parsing(1, line, line_tab[0]), free_arr(line_tab), -1);
 	if (error_status != 0)
 		return (error_parsing(error_status, line, line_tab[0]), free_arr(line_tab), -1);
 	return (free_arr(line_tab), 0);

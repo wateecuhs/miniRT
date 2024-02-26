@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:52:45 by panger            #+#    #+#             */
-/*   Updated: 2024/02/24 13:51:12 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:55:25 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,11 @@ t_colors	assign_color(__uint32_t color)
 	ret.g = color >> 8;
 	ret.b = color >> 0;
 	return (ret);
+}
+
+void	add_coeficient(double (*rgb)[3], double coef, t_colors color)
+{
+	(*rgb)[0] += coef * color.r / 255;
+	(*rgb)[1] += coef * color.g / 255;
+	(*rgb)[2] += coef * color.b / 255;
 }

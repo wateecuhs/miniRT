@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/24 17:59:53 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:02:27 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,20 +142,23 @@ void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
 double		intersect_sphere(t_ray ray, t_sphere *sphere);
 double		intersect_plane(t_ray ray, t_plane *plane);
 double		intersect_cylinder(t_ray ray, t_cylinder *cylinder);
+t_colors	light_calculation_plane(t_ray ray, t_scene *scene, t_colors color, t_plane *plane);
+t_colors	light_calculation_cylinder(t_ray ray, t_scene *scene, t_colors color, t_cylinder *cylinder);
+t_colors	light_calculation_sphere(t_ray ray, t_scene *scene, t_colors color, t_sphere *sphere);
+t_matrix	look_at(t_vectors cam_vector);
+t_ray		create_ray(t_vectors origin, t_vectors direction);
 
 // vectors
-void		normalize_vector(t_vectors *vector);
-t_vectors	add_coords_vectors(t_vectors coords, t_vectors vectors, double factor);
-t_vectors	multiply_vec_matrix(t_vectors p, t_matrix m);
 t_vectors	create_vector(double x, double y, double z);
-t_vectors	cross_product(t_vectors vec1, t_vectors vec2);
-t_vectors	substract(t_vectors vec1, t_vectors vec2);
-t_matrix	look_at(t_vectors origin, t_vectors cam_vector);
+void		vec_normalize(t_vectors *vector);
+t_vectors	vec_add(t_vectors coords, t_vectors vectors, double factor);
+t_vectors	vec_matrix_mult(t_vectors p, t_matrix m);
+t_vectors	vec_cross_product(t_vectors vec1, t_vectors vec2);
+t_vectors	vec_substract(t_vectors vec1, t_vectors vec2);
 double		vec_dot(t_vectors vec1, t_vectors vec2);
-t_ray		create_ray(t_vectors origin, t_vectors direction);
-t_vectors	multiply_vector(t_vectors vec1, double factor);
-int			color_to_int(t_colors color);
-double		vector_distance(t_vectors vec1, t_vectors vec2);
+t_vectors	vec_multiply(t_vectors vec1, double factor);
+double		vec_distance(t_vectors vec1, t_vectors vec2);
+double		vec_cos(t_vectors a, t_vectors b);
 
 // lib
 int			ft_strcmp(char *s1, char *s2);
@@ -186,6 +189,8 @@ t_colors	multiply_colors(t_colors color, t_colors new, double ratio);
 t_colors	add_ambient(t_colors color, t_ambient *ambient);
 t_colors	create_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
 t_colors	assign_color(__uint32_t color);
+int			color_to_int(t_colors color);
+void		add_coeficient(double (*rgb)[3], double coef, t_colors color);
 
 // parsing
 t_scene		*parsing_hub(int argc, char **argv);

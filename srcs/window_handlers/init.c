@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:28:46 by panger            #+#    #+#             */
-/*   Updated: 2024/02/12 15:25:45 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:20:54 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	init(t_scene *scene)
 {
 	t_mlx	mlx;
+	t_img	img;
 
 	mlx.mlx = mlx_init();
 	if (!mlx.mlx)
@@ -23,8 +24,7 @@ int	init(t_scene *scene)
 	if (!mlx.win)
 		return (perror_prefix("minilibx"), 1);
 	mlx.scene = scene;
-	mlx.img = NULL;
-	mlx.img = (t_img *)malloc(sizeof(t_img) * 1);
+	mlx.img = &img;
 	set_hooks(&mlx);
 	mlx.img->addr = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
 	mlx.img->buffer = mlx_get_data_addr(mlx.img->addr,

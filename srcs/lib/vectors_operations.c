@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:42:50 by panger            #+#    #+#             */
-/*   Updated: 2024/02/24 15:13:27 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:59:59 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vectors	create_vector(double x, double y, double z)
 	return (ret);
 }
 
-t_vectors	cross_product(t_vectors vec1, t_vectors vec2)
+t_vectors	vec_cross_product(t_vectors vec1, t_vectors vec2)
 {
 	t_vectors result;
 
@@ -32,7 +32,7 @@ t_vectors	cross_product(t_vectors vec1, t_vectors vec2)
 	return (result);
 }
 
-t_vectors	substract(t_vectors vec1, t_vectors vec2)
+t_vectors	vec_substract(t_vectors vec1, t_vectors vec2)
 {
 	t_vectors result;
 
@@ -42,7 +42,7 @@ t_vectors	substract(t_vectors vec1, t_vectors vec2)
 	return (result);
 }
 
-t_vectors	multiply_vector(t_vectors vec1, double factor)
+t_vectors	vec_multiply(t_vectors vec1, double factor)
 {
 	t_vectors result;
 
@@ -52,10 +52,20 @@ t_vectors	multiply_vector(t_vectors vec1, double factor)
 	return (result);
 }
 
-double	vector_distance(t_vectors vec1, t_vectors vec2)
+double	vec_distance(t_vectors vec1, t_vectors vec2)
 {
 	double result;
 
 	result = sqrt(pow(vec2.x - vec1.x, 2) + pow(vec2.y - vec1.y, 2) + pow(vec2.z - vec1.z, 2));
 	return (result);
+}
+
+double	vec_len(t_vectors v)
+{
+	return (sqrt(vec_dot(v, v)));
+}
+
+double	vec_cos(t_vectors a, t_vectors b)
+{
+	return (vec_dot(a, b) / (vec_len(a) * vec_len(b)));
 }
