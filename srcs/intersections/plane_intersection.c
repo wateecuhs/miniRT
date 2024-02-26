@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_hooks.c                                        :+:      :+:    :+:   */
+/*   plane_intersection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 14:37:17 by panger            #+#    #+#             */
-/*   Updated: 2024/02/24 17:55:51 by panger           ###   ########.fr       */
+/*   Created: 2024/02/24 17:57:46 by panger            #+#    #+#             */
+/*   Updated: 2024/02/24 17:58:11 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	cross_close(t_mlx *mlx)
+double	intersect_plane(t_ray ray, t_plane *plane)
 {
-	if (mlx->img)
-		mlx_destroy_image(mlx->mlx, mlx->img->addr);
-	mlx_destroy_window(mlx->mlx, mlx->win);
-	free_scene(mlx->scene);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
+	double		a;
+	double		x;
 
-void	set_hooks(t_mlx *mlx)
-{
-	mlx_hook(mlx->win, 17, 1L << 0, cross_close, mlx);
+	a = vec_dot(plane->vectors, ray.vector);
+	if (a != 0)
+	{
+		x = (vec_dot(plane->vectors, substract(plane->coords, ray.origin))) / a;
+		if (x > 0)
+			return (x);
+	}
+	return (0);
 }

@@ -1,4 +1,4 @@
-SRCS			=	miniRT.c $(SRCS_PARSING) $(SRCS_LIB) $(SRCS_GNL) $(SRCS_WINDOW) $(SRCS_TMP) $(SRCS_DRAW)
+SRCS			=	miniRT.c $(SRCS_PARSING) $(SRCS_LIB) $(SRCS_GNL) $(SRCS_WINDOW) $(SRCS_TMP) $(SRCS_DRAW) $(SRCS_INTERSECTIONS)
 
 SRCS_PARSING	=	parsing/parsing.c \
 					parsing/scene_identifiers.c \
@@ -10,7 +10,11 @@ SRCS_WINDOW		=	window_handlers/set_hooks.c \
 					window_handlers/render_image.c
 
 SRCS_DRAW		=	draw/draw_pixel.c \
-					draw/render_pixel.c
+					draw/render_pixel.c 
+				
+SRCS_INTERSECTIONS =	intersections/cylinder_intersection.c \
+					intersections/plane_intersection.c \
+					intersections/sphere_intersection.c 
 
 SRCS_LIB		=	lib/ft_strcmp.c \
 					lib/ft_strchr.c \

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:42:50 by panger            #+#    #+#             */
-/*   Updated: 2024/02/20 15:34:41 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:55:35 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ t_ray	ray_to_pixel(int x, int y, t_scene *scene)
 
 	direction = get_direction(x, y, scene);
 	normalize_vector(&direction);
-	// printf("for %d %d direction %f %f %f\n",x, y, direction.x, direction.y, direction.z);
 	c2w = look_at(scene->camera->coords, scene->camera->vectors);
 	direction = multiply_vec_matrix(direction, c2w);
 	return (create_ray(scene->camera->coords, direction));

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/24 15:13:32 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:59:53 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,9 @@ int			render_pixel(t_mlx *mlx, int x, int y);
 int			init(t_scene *scene);
 int			calc_pixel(int x, int y, t_img *img);
 void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
+double		intersect_sphere(t_ray ray, t_sphere *sphere);
+double		intersect_plane(t_ray ray, t_plane *plane);
+double		intersect_cylinder(t_ray ray, t_cylinder *cylinder);
 
 // vectors
 void		normalize_vector(t_vectors *vector);
