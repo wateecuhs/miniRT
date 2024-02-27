@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_calculations.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:53:08 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 14:14:52 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:17:11 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,38 +77,3 @@ int	light_intersects(t_ray ray, t_scene *scene)
 		return (1);
 	return (0);
 }
-
-/*
-int	light_intersects(t_ray ray, t_scene *scene)
-{
-	void		*tmp;
-	double		closest;
-	double		ret;
-
-	tmp = scene->sphere;
-	closest = INFINITY;
-	while (tmp)
-	{
-		ret = intersect_sphere(ray, tmp);
-		if (ret < closest && ret > 0)
-			return (1);
-		tmp = ((t_sphere *)tmp)->next;
-	}
-	tmp = scene->plane;
-	while (tmp)
-	{
-		ret = intersect_plane(ray, tmp);
-		if (ret < closest && ret > 0)
-			return (1);
-		tmp = ((t_plane *)tmp)->next;
-	}
-	tmp = scene->cylinder;
-	while (tmp)
-	{
-		ret = intersect_cylinder(ray, tmp);
-		if (ret < closest && ret > 0)
-			return (1);
-		tmp = ((t_cylinder *)tmp)->next;
-	}
-	return (0);
-}*/

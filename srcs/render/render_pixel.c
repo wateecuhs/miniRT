@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_pixel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:23:22 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 11:40:39 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:24:39 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,51 +22,76 @@ t_colors	add_colors(t_colors color1, t_colors color2, double coef)
 	return (ret);
 }
 
-t_colors	get_all_intersections(t_ray ray, t_scene *scene)
+double	sphere_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
 {
-	void		*tmp;
-	double		closest;
+	t_sphere	*tmp;
 	double		ret;
-	t_colors	color;
 
 	tmp = scene->sphere;
-	closest = INFINITY;
-	color = assign_color(0x000000);
 	while (tmp)
 	{
 		ret = intersect_sphere(ray, tmp);
-		if (ret < closest && ret > 0)
+		if (ret < *closest && ret > 0)
 		{
-			closest = ret;
-			color = ((t_sphere *)tmp)->color;
-			color = light_calc_sph(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
+			*closest = ret;
+			*color = tmp->color;
+			*color = light_calc_sph(create_ray(vec_add(ray.origin, ray.vector, *closest), ray.vector), scene, *color, tmp);
 		}
-		tmp = ((t_sphere *)tmp)->next;
+		tmp = tmp->next;
 	}
+	return (*closest);
+}
+
+double	plane_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
+{
+	t_plane		*tmp;
+	double		ret;
+
 	tmp = scene->plane;
 	while (tmp)
 	{
 		ret = intersect_plane(ray, tmp);
-		if (ret < closest && ret > 0)
+		if (ret < *closest && ret > 0)
 		{
-			closest = ret;
-			color = ((t_plane *)tmp)->color;
-			color = light_calc_plane(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
+			*closest = ret;
+			*color = tmp->color;
+			*color = light_calc_plane(create_ray(vec_add(ray.origin, ray.vector, *closest), ray.vector), scene, *color, tmp);
 		}
-		tmp = ((t_plane *)tmp)->next;
+		tmp = tmp->next;
 	}
+	return (*closest);
+}
+
+double	cylin_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
+{
+	t_cylinder	*tmp;
+	double		ret;
+
 	tmp = scene->cylinder;
 	while (tmp)
 	{
 		ret = intersect_cylinder(ray, tmp);
-		if (ret < closest && ret > 0)
+		if (ret < *closest && ret > 0)
 		{
-			closest = ret;
-			color = ((t_cylinder *)tmp)->color;
-			color = light_calc_cyl(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
+			*closest = ret;
+			*color = tmp->color;
+			*color = light_calc_cyl(create_ray(vec_add(ray.origin, ray.vector, *closest), ray.vector), scene, *color, tmp);
 		}
-		tmp = ((t_cylinder *)tmp)->next;
+		tmp = tmp->next;
 	}
+	return (*closest);
+}
+
+t_colors	get_all_intersections(t_ray ray, t_scene *scene)
+{
+	double		closest;
+	t_colors	color;
+
+	closest = INFINITY;
+	color = assign_color(0x000000);
+	sphere_inter(scene, &color, ray, &closest);
+	plane_inter(scene, &color, ray, &closest);
+	cylin_inter(scene, &color, ray, &closest);
 	return (color);
 }
 
