@@ -12,7 +12,8 @@ SRCS_WINDOW		=	window_handlers/set_hooks.c \
 SRCS_RENDER		=	render/draw_pixel.c \
 					render/render_pixel.c \
 					render/calc_ray.c \
-					render/light_calculations.c
+					render/light_calculations.c \
+					render/light_calculations2.c
 				
 SRCS_INTERSECTIONS =	intersections/cylinder_intersection.c \
 					intersections/plane_intersection.c \
@@ -34,7 +35,10 @@ SRCS_LIB		=	lib/ft_strcmp.c \
 					lib/ft_assign.c \
 					lib/vectors_operations2.c \
 					lib/vectors_operations.c \
-					lib/colors.c
+					lib/colors.c \
+					lib/print_scene2.c \
+					lib/vector_operation_get.c \
+					lib/colors2.c
 
 SRCS_GNL		=	get_next_line/get_next_line_utils.c \
 					get_next_line/get_next_line.c

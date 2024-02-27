@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:31:09 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 11:40:04 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:55:20 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,10 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	free_scene(t_scene *scene)
+void	free_object(t_scene *scene)
 {
 	void	*tmp;
 
-	if (scene->ambient_light)
-		free(scene->ambient_light);
-	if (scene->light)
-		free(scene->light);
-	if (scene->camera)
-		free(scene->camera);
 	while (scene->sphere)
 	{
 		tmp = scene->sphere->next;
@@ -50,5 +44,18 @@ void	free_scene(t_scene *scene)
 		free(scene->cylinder);
 		scene->cylinder = tmp;
 	}
+}
+
+void	free_scene(t_scene *scene)
+{
+	void	*tmp;
+
+	if (scene->ambient_light)
+		free(scene->ambient_light);
+	if (scene->light)
+		free(scene->light);
+	if (scene->camera)
+		free(scene->camera);
+	free_object(scene);
 	free(scene);
 }

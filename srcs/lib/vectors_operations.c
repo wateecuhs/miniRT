@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors_operations.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:42:50 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 12:59:59 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:50:51 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vectors	create_vector(double x, double y, double z)
 
 t_vectors	vec_cross_product(t_vectors vec1, t_vectors vec2)
 {
-	t_vectors result;
+	t_vectors	result;
 
 	result.x = vec1.y * vec2.z - vec1.z * vec2.y;
 	result.y = vec1.z * vec2.x - vec1.x * vec2.z;
@@ -34,7 +34,7 @@ t_vectors	vec_cross_product(t_vectors vec1, t_vectors vec2)
 
 t_vectors	vec_substract(t_vectors vec1, t_vectors vec2)
 {
-	t_vectors result;
+	t_vectors	result;
 
 	result.x = vec1.x - vec2.x;
 	result.y = vec1.y - vec2.y;
@@ -44,7 +44,7 @@ t_vectors	vec_substract(t_vectors vec1, t_vectors vec2)
 
 t_vectors	vec_multiply(t_vectors vec1, double factor)
 {
-	t_vectors result;
+	t_vectors	result;
 
 	result.x = vec1.x * factor;
 	result.y = vec1.y * factor;
@@ -54,18 +54,9 @@ t_vectors	vec_multiply(t_vectors vec1, double factor)
 
 double	vec_distance(t_vectors vec1, t_vectors vec2)
 {
-	double result;
+	double	result;
 
-	result = sqrt(pow(vec2.x - vec1.x, 2) + pow(vec2.y - vec1.y, 2) + pow(vec2.z - vec1.z, 2));
+	result = sqrt(pow(vec2.x - vec1.x, 2) + pow(vec2.y - vec1.y, 2) \
+	+ pow(vec2.z - vec1.z, 2));
 	return (result);
-}
-
-double	vec_len(t_vectors v)
-{
-	return (sqrt(vec_dot(v, v)));
-}
-
-double	vec_cos(t_vectors a, t_vectors b)
-{
-	return (vec_dot(a, b) / (vec_len(a) * vec_len(b)));
 }

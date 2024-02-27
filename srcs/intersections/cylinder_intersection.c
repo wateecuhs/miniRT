@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:58:43 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 13:12:35 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 12:14:08 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int	solve_cylinder(t_ray ray, t_cylinder *cylinder, double x[2])
 	double		params[3];
 	double		delta;
 
-	v = vec_substract(ray.vector, vec_multiply(cylinder->vectors, vec_dot(ray.vector, cylinder->vectors)));
-	u = vec_substract(vec_substract(ray.origin, cylinder->coords), vec_multiply(cylinder->vectors, vec_dot(vec_substract(ray.origin, cylinder->coords), cylinder->vectors)));
+	v = vec_substract(ray.vector, vec_multiply(cylinder->vectors, \
+	vec_dot(ray.vector, cylinder->vectors)));
+	u = vec_substract(vec_substract(ray.origin, cylinder->coords), \
+	vec_multiply(cylinder->vectors, vec_dot(vec_substract(ray.origin, \
+	cylinder->coords), cylinder->vectors)));
 	params[0] = vec_dot(v, v);
 	params[1] = 2 * vec_dot(v, u);
 	params[2] = vec_dot(u, u) - (cylinder->diameter * cylinder->diameter);
@@ -47,29 +50,32 @@ int	solve_cylinder(t_ray ray, t_cylinder *cylinder, double x[2])
 	return (0);
 }
 
-t_vectors	get_cylinder_normal(t_ray ray, t_cylinder *cylinder, double distances[2], double x[2])
+t_vectors	get_cyl_nrl(t_ray ray, t_cylinder *cy, double dists[2], double x[2])
 {
 	double	dist;
 	double	tmp;
 
-	if ((distances[0] >= 0 && distances[0] <= cylinder->height && distances[0] > EPSILON)
-		&& (distances[1] >= 0 && distances[1] <= cylinder->height && distances[1] > EPSILON))
+	dist = dists[1];
+	tmp = x[1];
+	if ((dists[0] >= 0 && dists[0] <= cy->height && dists[0] > EPSILON)
+		&& (dists[1] >= 0 && dists[1] <= cy->height && dists[1] > EPSILON))
 	{
-		dist = x[0] < x[1] ? distances[0] : distances[1];
-		tmp = x[0] < x[1] ? x[0] : x[1];
+		dist = dists[1];
+		tmp = x[1];
+		if (x[0] < x[1])
+		{
+			dist = dists[0];
+			tmp = x[0];
+		}
 	}
-	else if (distances[0] >= 0 && distances[0] <= cylinder->height && distances[0] > EPSILON)
+	else if (dists[0] >= 0 && dists[0] <= cy->height && dists[0] > EPSILON)
 	{
-		dist = distances[0];
+		dist = dists[0];
 		tmp = x[0];
 	}
-	else
-	{
-		dist = distances[1];
-		tmp = x[1];
-	}
 	x[0] = tmp;
-	return (vec_substract(vec_substract(vec_multiply(ray.vector, x[0]), vec_multiply(cylinder->vectors, dist)), vec_substract(cylinder->coords, ray.origin)));
+	return (vec_substract(vec_substract(vec_multiply(ray.vector, x[0]), \
+	vec_multiply(cy->vectors, dist)), vec_substract(cy->coords, ray.origin)));
 }
 
 double	caps_intersection(t_ray ray, t_cylinder *cylinder)
@@ -85,7 +91,12 @@ double	caps_intersection(t_ray ray, t_cylinder *cylinder)
 	inters[1] = vec_add(ray.origin, ray.vector, distances[1]);
 	if (vec_distance(inters[0], cylinder->coords) < cylinder->diameter
 		&& vec_distance(inters[1], top_cap) < cylinder->diameter)
-		return (distances[0] < distances[1] ? distances[0] : distances[1]);
+	{
+		if (distances[0] < distances[1])
+			return (distances[0]);
+		else
+			return (distances[1]);
+	}
 	else if (vec_distance(inters[0], cylinder->coords) < cylinder->diameter)
 		return (distances[0]);
 	else if (vec_distance(inters[1], top_cap) < cylinder->diameter)
@@ -95,17 +106,21 @@ double	caps_intersection(t_ray ray, t_cylinder *cylinder)
 
 double	intersect_cylinder(t_ray ray, t_cylinder *cylinder)
 {
-	double		distances[2];
+	double		dists[2];
 	double		x[2];
 
 	if (solve_cylinder(ray, cylinder, x) == 0)
 		return (0);
-	distances[0] = vec_dot(cylinder->vectors, vec_substract(vec_multiply(ray.vector, x[0]), vec_substract(cylinder->coords, ray.origin)));
-	distances[1] = vec_dot(cylinder->vectors, vec_substract(vec_multiply(ray.vector, x[1]), vec_substract(cylinder->coords, ray.origin)));
-	if (!((distances[0] >= 0 && distances[0] <= cylinder->height && x[0] > 0)
-		|| (distances[1] >= 0 && distances[1] <= cylinder->height && x[1] > 0)))
+	dists[0] = vec_dot(cylinder->vectors, \
+	vec_substract(vec_multiply(ray.vector, x[0]), \
+	vec_substract(cylinder->coords, ray.origin)));
+	dists[1] = vec_dot(cylinder->vectors, \
+	vec_substract(vec_multiply(ray.vector, x[1]), \
+	vec_substract(cylinder->coords, ray.origin)));
+	if (!((dists[0] >= 0 && dists[0] <= cylinder->height && x[0] > 0)
+			|| (dists[1] >= 0 && dists[1] <= cylinder->height && x[1] > 0)))
 		return (0);
-	cylinder->normal = get_cylinder_normal(ray, cylinder, distances, x);
+	cylinder->normal = get_cyl_nrl(ray, cylinder, dists, x);
 	x[1] = caps_intersection(ray, cylinder);
 	if (x[1] < x[0])
 	{

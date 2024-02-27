@@ -3,15 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   print_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:38:47 by panger            #+#    #+#             */
-/*   Updated: 2024/02/05 11:39:52 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:34:11 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+void	print_objects(t_scene *scene)
+{
+	t_sphere	*sp;
+	t_plane		*pl;
+	t_cylinder	*cy;
+
+	sp = scene->sphere;
+	while (sp)
+	{
+		print_sphere(sp);
+		sp = sp->next;
+	}
+	pl = scene->plane;
+	while (pl)
+	{
+		print_plane(pl);
+		pl = pl->next;
+	}
+	cy = scene->cylinder;
+	while (cy)
+	{
+		print_cylinder(cy);
+		cy = cy->next;
+	}
+}
+
+void	print_scene(t_scene *scene)
+{
+	if (scene->ambient_light)
+		printf("Ambient light:\nColors: %.1hhu %.1hhu %.1hhu\nRatio: %.1f\n\n", \
+		scene->ambient_light->color.r, scene->ambient_light->color.g, \
+		scene->ambient_light->color.b, scene->ambient_light->ratio);
+	print_light(scene->light);
+	print_camera(scene->camera);
+	print_objects(scene);
+}
+
+/*
 void	print_scene(t_scene *scene)
 {
 	t_sphere	*tmp;
@@ -41,4 +79,4 @@ void	print_scene(t_scene *scene)
 		printf("Cylinder:\nColors: %.1hhu %.1hhu %.1hhu\nVectors: %.1f %.1f %.1f\nCoords: %.1f %.1f %.1f\nDiameter: %.1f\nHeight: %.1f\n\n", tmp2->color.r, tmp2->color.g, tmp2->color.b,  tmp2->vectors.x, tmp2->vectors.y, tmp2->vectors.z, tmp2->coords.x, tmp2->coords.y, tmp2->coords.z, tmp2->diameter, tmp2->height);
 		tmp2 = tmp2->next;
 	}
-}
+}*/

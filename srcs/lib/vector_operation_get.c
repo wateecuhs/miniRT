@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane_intersection.c                               :+:      :+:    :+:   */
+/*   vector_operation_get.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 17:57:46 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 11:45:46 by dcindrak         ###   ########.fr       */
+/*   Created: 2024/02/27 13:50:54 by dcindrak          #+#    #+#             */
+/*   Updated: 2024/02/27 13:54:19 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double	intersect_plane(t_ray ray, t_plane *plane)
+double	vec_len(t_vectors v)
 {
-	double		a;
-	double		x;
+	return (sqrt(vec_dot(v, v)));
+}
 
-	a = vec_dot(plane->vectors, ray.vector);
-	if (a != 0)
-	{
-		x = (vec_dot(plane->vectors, \
-		vec_substract(plane->coords, ray.origin))) / a;
-		if (x > 0)
-			return (x);
-	}
-	return (0);
+double	vec_cos(t_vectors a, t_vectors b)
+{
+	return (vec_dot(a, b) / (vec_len(a) * vec_len(b)));
+}
+
+double	vec_dot(t_vectors vec1, t_vectors vec2)
+{
+	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }

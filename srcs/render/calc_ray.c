@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:45:39 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 13:01:07 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 12:24:25 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_ray	create_ray(t_vectors origin, t_vectors direction)
 
 t_vectors	get_direction(int x, int y, t_scene *scene)
 {
-	double fov_coeff;
-	double aspect_ratio;
+	double		fov_coeff;
+	double		aspect_ratio;
 	t_vectors	ret;
 
 	fov_coeff = tan(((double)scene->camera->fov / 2) * (M_PI / 180));
@@ -47,12 +47,11 @@ t_matrix	look_at(t_vectors cam_vector)
 	tmp = create_vector(0, 1, 0);
 	forward = cam_vector;
 	vec_normalize(&forward);
+	right = vec_cross_product(tmp, forward);
 	if (forward.y == 1)
-		right = create_vector(1, 0 ,0);
+		right = create_vector(1, 0, 0);
 	else if (forward.y == -1)
-		right = create_vector(-1, 0 ,0);
-	else
-		right = vec_cross_product(tmp, forward);
+		right = create_vector(-1, 0, 0);
 	up = vec_cross_product(forward, right);
 	m.m[0][0] = right.x;
 	m.m[0][1] = right.y;

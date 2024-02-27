@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 12:32:15 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 12:21:01 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	get_file(char *file_path);
+int		get_file(char *file_path);
 t_scene	*parse_lines(int fd);
 
 t_scene	*parsing_hub(int argc, char **argv)
@@ -59,27 +59,29 @@ int	get_file(char *file_path)
 int	redirect_line(char *str, t_scene *scene, size_t line)
 {
 	char	**line_tab;
-	int		error_status;
+	int		err;
 
 	line_tab = ft_split(str, " \t");
 	if (!line_tab)
 		return (-1);
 	if (ft_strcmp(line_tab[0], "A") == 0 && scene->ambient_light == NULL)
-		scene->ambient_light = ambient_identifier(line_tab, &error_status);
+		scene->ambient_light = ambient_identifier(line_tab, &err);
 	else if (ft_strcmp(line_tab[0], "C") == 0 && scene->camera == NULL)
-		scene->camera = camera_identifier(line_tab, &error_status);
+		scene->camera = camera_identifier(line_tab, &err);
 	else if (ft_strcmp(line_tab[0], "L") == 0 && scene->light == NULL)
-		scene->light = light_identifier(line_tab, &error_status);
+		scene->light = light_identifier(line_tab, &err);
 	else if (ft_strcmp(line_tab[0], "sp") == 0)
-		ft_sphere_addback(&(scene->sphere), sphere_identifier(line_tab, &error_status));
+		ft_sphere_addback(&(scene->sphere), sphere_identifier(line_tab, &err));
 	else if (ft_strcmp(line_tab[0], "pl") == 0)
-		ft_plane_addback(&(scene->plane), plane_identifier(line_tab, &error_status));
+		ft_plane_addback(&(scene->plane), plane_identifier(line_tab, &err));
 	else if (ft_strcmp(line_tab[0], "cy") == 0)
-		ft_cylinder_addback(&(scene->cylinder), cylinder_identifier(line_tab, &error_status));
+		ft_cylinder_addback(&(scene->cylinder), \
+		cylinder_identifier(line_tab, &err));
 	else
 		return (error_parsing(1, line, line_tab[0]), free_arr(line_tab), -1);
-	if (error_status != 0)
-		return (error_parsing(error_status, line, line_tab[0]), free_arr(line_tab), -1);
+	if (err != 0)
+		return (error_parsing(err, line, \
+		line_tab[0]), free_arr(line_tab), -1);
 	return (free_arr(line_tab), 0);
 }
 

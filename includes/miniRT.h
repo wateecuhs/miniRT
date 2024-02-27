@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 13:02:27 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:47:08 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,13 @@ void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
 double		intersect_sphere(t_ray ray, t_sphere *sphere);
 double		intersect_plane(t_ray ray, t_plane *plane);
 double		intersect_cylinder(t_ray ray, t_cylinder *cylinder);
-t_colors	light_calculation_plane(t_ray ray, t_scene *scene, t_colors color, t_plane *plane);
-t_colors	light_calculation_cylinder(t_ray ray, t_scene *scene, t_colors color, t_cylinder *cylinder);
-t_colors	light_calculation_sphere(t_ray ray, t_scene *scene, t_colors color, t_sphere *sphere);
+t_colors	light_calc_plane(t_ray ray, t_scene *sc, t_colors cl, t_plane *pl);
+t_colors	light_calc_cyl(t_ray ray, t_scene *sc, t_colors cl, t_cylinder *cy);
+t_colors	light_calc_sph(t_ray ray, t_scene *sc, t_colors cl, t_sphere *sph);
 t_matrix	look_at(t_vectors cam_vector);
 t_ray		create_ray(t_vectors origin, t_vectors direction);
+t_colors	apply_light(t_colors color, double rgb[3]);
+int			light_intersects(t_ray ray, t_scene *scene);
 
 // vectors
 t_vectors	create_vector(double x, double y, double z);
@@ -211,5 +213,12 @@ char		*ft_strdupset(char const *s, int start, int stop);
 
 // tmp
 void		print_scene(t_scene *scene);
+
+// print
+void		print_light(t_light *light);
+void		print_camera(t_camera *camera);
+void		print_sphere(t_sphere *sp);
+void		print_plane(t_plane *pl);
+void		print_cylinder(t_cylinder *cy);
 
 #endif

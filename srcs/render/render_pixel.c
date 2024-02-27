@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_pixel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:23:22 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 13:04:24 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 11:40:39 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_colors	get_all_intersections(t_ray ray, t_scene *scene)
 		{
 			closest = ret;
 			color = ((t_sphere *)tmp)->color;
-			color = light_calculation_sphere(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
+			color = light_calc_sph(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
 		}
 		tmp = ((t_sphere *)tmp)->next;
 	}
@@ -51,7 +51,7 @@ t_colors	get_all_intersections(t_ray ray, t_scene *scene)
 		{
 			closest = ret;
 			color = ((t_plane *)tmp)->color;
-			color = light_calculation_plane(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
+			color = light_calc_plane(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
 		}
 		tmp = ((t_plane *)tmp)->next;
 	}
@@ -63,7 +63,7 @@ t_colors	get_all_intersections(t_ray ray, t_scene *scene)
 		{
 			closest = ret;
 			color = ((t_cylinder *)tmp)->color;
-			color = light_calculation_cylinder(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
+			color = light_calc_cyl(create_ray(vec_add(ray.origin, ray.vector, closest), ray.vector), scene, color, tmp);
 		}
 		tmp = ((t_cylinder *)tmp)->next;
 	}

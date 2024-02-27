@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:52:45 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 12:55:25 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:54:12 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,4 @@ t_colors	create_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b)
 	ret.g = g;
 	ret.b = b;
 	return (ret);
-}
-
-int	color_to_int(t_colors color)
-{
-	int	ret;
-
-	ret = color.a << 24 | color.r << 16 | color.g << 8 | color.b;
-	return (ret);
-}
-
-t_colors	assign_color(__uint32_t color)
-{
-	t_colors	ret;
-
-	ret.a = color >> 24;
-	ret.r = color >> 16;
-	ret.g = color >> 8;
-	ret.b = color >> 0;
-	return (ret);
-}
-
-void	add_coeficient(double (*rgb)[3], double coef, t_colors color)
-{
-	(*rgb)[0] += coef * color.r / 255;
-	(*rgb)[1] += coef * color.g / 255;
-	(*rgb)[2] += coef * color.b / 255;
 }
