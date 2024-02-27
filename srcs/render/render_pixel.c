@@ -6,23 +6,14 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:23:22 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 16:24:39 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 16:29:39 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_colors	add_colors(t_colors color1, t_colors color2, double coef)
-{
-	t_colors	ret;
-
-	ret.r = color2.r + (color1.r * coef);
-	ret.g = color2.g + (color1.g * coef);
-	ret.b = color2.b + (color1.b * coef);
-	return (ret);
-}
-
-double	sphere_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
+double	sphere_inter(t_scene *scene, t_colors *color,
+			t_ray ray, double *closest)
 {
 	t_sphere	*tmp;
 	double		ret;
@@ -35,7 +26,8 @@ double	sphere_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
 		{
 			*closest = ret;
 			*color = tmp->color;
-			*color = light_calc_sph(create_ray(vec_add(ray.origin, ray.vector, *closest), ray.vector), scene, *color, tmp);
+			*color = light_calc_sph(create_ray(vec_add(ray.origin, ray.vector,
+							*closest), ray.vector), scene, *color, tmp);
 		}
 		tmp = tmp->next;
 	}
@@ -55,7 +47,8 @@ double	plane_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
 		{
 			*closest = ret;
 			*color = tmp->color;
-			*color = light_calc_plane(create_ray(vec_add(ray.origin, ray.vector, *closest), ray.vector), scene, *color, tmp);
+			*color = light_calc_plane(create_ray(vec_add(ray.origin, ray.vector,
+							*closest), ray.vector), scene, *color, tmp);
 		}
 		tmp = tmp->next;
 	}
@@ -75,7 +68,8 @@ double	cylin_inter(t_scene *scene, t_colors *color, t_ray ray, double *closest)
 		{
 			*closest = ret;
 			*color = tmp->color;
-			*color = light_calc_cyl(create_ray(vec_add(ray.origin, ray.vector, *closest), ray.vector), scene, *color, tmp);
+			*color = light_calc_cyl(create_ray(vec_add(ray.origin, ray.vector,
+							*closest), ray.vector), scene, *color, tmp);
 		}
 		tmp = tmp->next;
 	}

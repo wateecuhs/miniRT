@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:31:09 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 13:55:20 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:35:10 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	free_object(t_scene *scene)
 
 void	free_scene(t_scene *scene)
 {
-	void	*tmp;
-
 	if (scene->ambient_light)
 		free(scene->ambient_light);
 	if (scene->light)

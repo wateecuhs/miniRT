@@ -1,4 +1,4 @@
-SRCS			=	miniRT.c $(SRCS_PARSING) $(SRCS_LIB) $(SRCS_GNL) $(SRCS_WINDOW) $(SRCS_TMP) $(SRCS_RENDER) $(SRCS_INTERSECTIONS)
+SRCS			=	miniRT.c $(SRCS_PARSING) $(SRCS_LIB) $(SRCS_GNL) $(SRCS_WINDOW) $(SRCS_RENDER) $(SRCS_INTERSECTIONS)
 
 SRCS_PARSING	=	parsing/parsing.c \
 					parsing/scene_identifiers.c \
@@ -32,15 +32,10 @@ SRCS_LIB		=	lib/ft_strcmp.c \
 					lib/ft_split.c \
 					lib/ft_numbers.c \
 					lib/lst.c \
-					lib/ft_assign.c \
 					lib/vectors_operations2.c \
 					lib/vectors_operations.c \
 					lib/colors.c \
-					lib/print_scene2.c \
-					lib/vector_operation_get.c \
-					lib/colors2.c
+					lib/vectors_operations3.c
 
 SRCS_GNL		=	get_next_line/get_next_line_utils.c \
 					get_next_line/get_next_line.c
-
-SRCS_TMP		=	lib/print_scene.c

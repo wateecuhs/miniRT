@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assign.c                                        :+:      :+:    :+:   */
+/*   vectors_operations3.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 17:36:55 by panger            #+#    #+#             */
-/*   Updated: 2024/02/20 13:00:10 by panger           ###   ########.fr       */
+/*   Created: 2024/02/27 13:50:54 by dcindrak          #+#    #+#             */
+/*   Updated: 2024/02/27 16:34:07 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_pair	assign_pair(double x, double y)
+double	vec_len(t_vectors v)
 {
-	t_pair	ret;
+	return (sqrt(vec_dot(v, v)));
+}
 
-	ret.x = x;
-	ret.y = y;
-	return (ret);
+double	vec_cos(t_vectors a, t_vectors b)
+{
+	return (vec_dot(a, b) / (vec_len(a) * vec_len(b)));
+}
+
+double	vec_dot(t_vectors vec1, t_vectors vec2)
+{
+	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }
