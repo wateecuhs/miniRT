@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_calculations.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:53:08 by panger            #+#    #+#             */
-/*   Updated: 2024/02/28 14:14:00 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/28 18:46:48 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_colors	apply_light(t_colors color, double rgb[3])
 	t_colors	ret;
 	int			tmp;
 
-	tmp =  rgb[0] * color.r;
+	tmp = rgb[0] * color.r;
 	if (tmp > 255)
 		ret.r = 255;
 	else
@@ -46,7 +46,8 @@ int	intersect_spheres(t_ray ray, t_scene *scene)
 		ret = intersect_sphere(ray, tmp);
 		if (ret > 0)
 		{
-			if (vec_distance(ray.origin, vec_add(ray.origin, ray.vector, ret)) < vec_distance(ray.origin, scene->light->coords))
+			if (vec_distance(ray.origin, vec_add(ray.origin, ray.vector, \
+			ret)) < vec_distance(ray.origin, scene->light->coords))
 				return (1);
 		}
 		tmp = ((t_sphere *)tmp)->next;
@@ -65,7 +66,8 @@ int	intersect_planes(t_ray ray, t_scene *scene)
 		ret = intersect_plane(ray, tmp);
 		if (ret > 0)
 		{
-			if (vec_distance(ray.origin, vec_add(ray.origin, ray.vector, ret)) < vec_distance(ray.origin, scene->light->coords))
+			if (vec_distance(ray.origin, vec_add(ray.origin, ray.vector, \
+			ret)) < vec_distance(ray.origin, scene->light->coords))
 				return (1);
 		}
 		tmp = ((t_plane *)tmp)->next;
@@ -84,7 +86,8 @@ int	intersect_cylinders(t_ray ray, t_scene *scene)
 		ret = intersect_cylinder(ray, tmp);
 		if (ret > 0)
 		{
-			if (vec_distance(ray.origin, vec_add(ray.origin, ray.vector, ret)) < vec_distance(ray.origin, scene->light->coords))
+			if (vec_distance(ray.origin, vec_add(ray.origin, ray.vector, \
+			ret)) < vec_distance(ray.origin, scene->light->coords))
 				return (1);
 		}
 		tmp = ((t_cylinder *)tmp)->next;

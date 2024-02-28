@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/28 13:05:00 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/28 18:37:42 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ t_sphere	*sphere_identifier(char **line, int *error_status);
 int			get_vector(char *str, t_vectors *ret);
 int			get_rgb(char *str, t_colors *ret);
 int			get_coords(char *str, t_vectors *ret);
+int			split_checked(char *str);
 
 // gnl
 char		*get_next_line(int fd);
