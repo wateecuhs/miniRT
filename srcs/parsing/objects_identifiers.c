@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:12:32 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 12:34:16 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:15:00 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_plane	*plane_identifier(char **line, int *error_status)
 		return (*error_status = 1, free(ret), NULL);
 	if (!get_rgb(line[3], &(ret->color)))
 		return (*error_status = 1, free(ret), NULL);
+	vec_normalize(&ret->vectors);
 	return (ret);
 }
 
@@ -69,6 +70,7 @@ t_cylinder	*cylinder_identifier(char **line, int *error_status)
 		return (*error_status = 1, free(ret), NULL);
 	if (!get_vector(line[2], &(ret->vectors)))
 		return (*error_status = 1, free(ret), NULL);
+	vec_normalize(&ret->vectors);
 	if (!get_rgb(line[5], &(ret->color)))
 		return (*error_status = 1, free(ret), NULL);
 	return (ret);

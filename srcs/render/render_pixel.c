@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:23:22 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 16:29:39 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/28 13:08:01 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	sphere_inter(t_scene *scene, t_colors *color,
 	while (tmp)
 	{
 		ret = intersect_sphere(ray, tmp);
-		if (ret < *closest && ret > 0)
+		if (ret < *closest && ret >= 0)
 		{
 			*closest = ret;
 			*color = tmp->color;

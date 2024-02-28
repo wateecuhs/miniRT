@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 13:47:08 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:05:00 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ typedef struct s_matrix
 	double	m[3][3];
 }	t_matrix;
 
+typedef struct s_colors
+{
+	__uint8_t	a;
+	__uint8_t	r;
+	__uint8_t	g;
+	__uint8_t	b;
+}	t_colors;
+
 typedef struct s_pair
 {
 	double	x;
@@ -45,19 +53,19 @@ typedef struct s_vectors
 	double	z;
 }	t_vectors;
 
+typedef struct s_hit
+{
+	t_vectors	origin;
+	t_vectors	vector;
+	t_colors	color;
+	t_vectors	normal;
+}	t_hit;
+
 typedef struct s_ray
 {
 	t_vectors	origin;
 	t_vectors	vector;
 }	t_ray;
-
-typedef struct s_colors
-{
-	__uint8_t	a;
-	__uint8_t	r;
-	__uint8_t	g;
-	__uint8_t	b;
-}	t_colors;
 
 typedef struct s_ambient
 {

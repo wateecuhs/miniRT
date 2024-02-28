@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:31:09 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 16:35:10 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/27 16:35:44 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_arr(char **arr)
 void	free_object(t_scene *scene)
 {
 	void	*tmp;
-
+	
 	while (scene->sphere)
 	{
 		tmp = scene->sphere->next;

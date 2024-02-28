@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_intersection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:56:34 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 11:50:38 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:12:54 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ double	intersect_sphere(t_ray ray, t_sphere *sphere)
 		x[0] = (-params[1] - sqrtf(delta)) / (2 * params[0]);
 		x[1] = (-params[1] + sqrtf(delta)) / (2 * params[0]);
 		closest = 0;
-		if (x[0] > 0)
+		if (x[0] > EPSILON && x[1] > EPSILON)
+			closest = x[0] < x[1] ? x[0] : x[1];
+		else if (x[1] > EPSILON)
+			closest = x[1];
+		else if (x[0] > EPSILON)
 			closest = x[0];
-		if (x[1] > 0)
-			if (x[1] < x[0])
-				closest = x[1];
 		return (closest);
 	}
-	return (0);
+	return (-1);
 }

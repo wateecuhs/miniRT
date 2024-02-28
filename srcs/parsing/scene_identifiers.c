@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:55:04 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 12:34:08 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:14:53 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ t_camera	*camera_identifier(char **line, int *error_status)
 		return (*error_status = 1, free(ret), NULL);
 	if (!get_vector(line[2], &(ret->vectors)))
 		return (*error_status = 1, free(ret), NULL);
+	vec_normalize(&ret->vectors);
 	return (ret);
 }
