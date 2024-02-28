@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_calculations2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:29:14 by dcindrak          #+#    #+#             */
-/*   Updated: 2024/02/27 12:43:42 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:26:19 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

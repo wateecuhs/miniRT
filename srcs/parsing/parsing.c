@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/27 12:21:01 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:02:01 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_scene	*parse_lines(int fd)
 		if (ft_strcmp(line, "\n") != 0)
 		{
 			if (redirect_line(line, scene, i) == -1)
-				return (free_scene(scene), NULL);
+				return (free(line), free_scene(scene), NULL);
 		}
 		free(line);
 		line = get_next_line(fd);
