@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:58:49 by panger            #+#    #+#             */
-/*   Updated: 2024/02/28 18:37:42 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:47:28 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,15 +191,11 @@ void		ft_cylinder_addback(t_cylinder **head, t_cylinder *new);
 void		ft_plane_addback(t_plane **head, t_plane *new);
 void		ft_sphere_addback(t_sphere **head, t_sphere *new);
 void		error_parsing(int error_status, size_t line, char *type);
-t_pair		assign_pair(double x, double y);
 void		set_hooks(t_mlx *mlx);
 t_ray		ray_to_pixel(int x, int y, t_scene *scene);
 int			ft_atoi(const char *nptr);
-t_colors	multiply_colors(t_colors color, t_colors new, double ratio);
 t_colors	add_ambient(t_colors color, t_ambient *ambient);
-t_colors	create_color(__uint8_t a, __uint8_t r, __uint8_t g, __uint8_t b);
 t_colors	assign_color(__uint32_t color);
-int			color_to_int(t_colors color);
 void		add_coeficient(double (*rgb)[3], double coef, t_colors color);
 
 // parsing
@@ -213,21 +209,11 @@ t_sphere	*sphere_identifier(char **line, int *error_status);
 int			get_vector(char *str, t_vectors *ret);
 int			get_rgb(char *str, t_colors *ret);
 int			get_coords(char *str, t_vectors *ret);
-int			split_checked(char *str);
+int			split_checked(char *str, char *identifier, size_t line);
 
 // gnl
 char		*get_next_line(int fd);
 char		*ft_stradd(char *s1, char *s2, int size);
 char		*ft_strdupset(char const *s, int start, int stop);
-
-// tmp
-void		print_scene(t_scene *scene);
-
-// print
-void		print_light(t_light *light);
-void		print_camera(t_camera *camera);
-void		print_sphere(t_sphere *sp);
-void		print_plane(t_plane *pl);
-void		print_cylinder(t_cylinder *cy);
 
 #endif

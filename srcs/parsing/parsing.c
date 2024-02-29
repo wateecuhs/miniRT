@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:37:07 by panger            #+#    #+#             */
-/*   Updated: 2024/02/28 18:38:43 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:47:04 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	redirect_line(char *str, t_scene *scene, size_t line)
 	int		err;
 
 	line_tab = ft_split(str, " \t\n");
-	if (!line_tab || !split_checked(str))
+	if (!line_tab || !split_checked(str, line_tab[0], line))
 		return (-1);
 	if (ft_strcmp(line_tab[0], "A") == 0 && scene->ambient_light == NULL)
 		scene->ambient_light = ambient_identifier(line_tab, &err);
