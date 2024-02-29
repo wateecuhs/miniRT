@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects_identifiers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:12:32 by panger            #+#    #+#             */
-/*   Updated: 2024/02/28 14:15:00 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/29 11:30:24 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_sphere	*sphere_identifier(char **line, int *error_status)
 		return (*error_status = 1, NULL);
 	ret = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!ret)
-		return (perror_prefix("malloc"), NULL);
+		return (*error_status = 2, perror_prefix("malloc"), NULL);
 	ret->next = NULL;
 	ret->diameter = ft_atof(line[2]);
 	if (!get_coords(line[1], &(ret->coords)))
@@ -40,7 +40,7 @@ t_plane	*plane_identifier(char **line, int *error_status)
 		return (*error_status = 1, NULL);
 	ret = (t_plane *)malloc(sizeof(t_plane));
 	if (!ret)
-		return (perror_prefix("malloc"), NULL);
+		return (*error_status = 2, perror_prefix("malloc"), NULL);
 	ret->next = NULL;
 	if (!get_coords(line[1], &(ret->coords)))
 		return (*error_status = 1, free(ret), NULL);
@@ -61,7 +61,7 @@ t_cylinder	*cylinder_identifier(char **line, int *error_status)
 		return (*error_status = 1, NULL);
 	ret = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (!ret)
-		return (perror_prefix("malloc"), NULL);
+		return (*error_status = 2, perror_prefix("malloc"), NULL);
 	ret->next = NULL;
 	ret->vectors = create_vector(0, 0, 0);
 	ret->diameter = ft_atof(line[3]);

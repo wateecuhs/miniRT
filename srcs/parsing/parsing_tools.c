@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:28:10 by panger            #+#    #+#             */
-/*   Updated: 2024/02/29 10:48:00 by panger           ###   ########.fr       */
+/*   Updated: 2024/02/29 11:20:57 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_rgb(char *str, t_colors *ret)
 
 	arr = ft_split(str, ",");
 	if (!arr)
-		return (-1);
+		return (perror("malloc"), 0);
 	if (ft_arrlen(arr) != 3)
 		return (free_arr(arr), 0);
 	i = 0;
@@ -48,7 +48,7 @@ int	get_coords(char *str, t_vectors *ret)
 
 	arr = ft_split(str, ",");
 	if (!arr)
-		return (-1);
+		return (perror("malloc"), 0);
 	if (ft_arrlen(arr) != 3 || !is_float(arr[0]) || !is_float(arr[1])
 		|| !is_float(arr[2]))
 		return (0);
@@ -75,7 +75,7 @@ int	get_vector(char *str, t_vectors *ret)
 
 	arr = ft_split(str, ",");
 	if (!arr)
-		return (-1);
+		return (perror("malloc"), 0);
 	if (ft_arrlen(arr) != 3 || !is_float(arr[0]) || !is_float(arr[1])
 		|| !is_float(arr[2]))
 		return (free_arr(arr), 0);
