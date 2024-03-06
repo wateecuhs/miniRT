@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:37:17 by panger            #+#    #+#             */
-/*   Updated: 2024/02/26 12:19:42 by panger           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:18:12 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	cross_close(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->img->addr);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	free_scene(mlx->scene);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx->mlx);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -30,6 +32,8 @@ int	key_close(int keycode, t_mlx *mlx)
 			mlx_destroy_image(mlx->mlx, mlx->img->addr);
 		mlx_destroy_window(mlx->mlx, mlx->win);
 		free_scene(mlx->scene);
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
