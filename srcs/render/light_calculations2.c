@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_calculations2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcindrak <dcindrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:29:14 by dcindrak          #+#    #+#             */
-/*   Updated: 2024/03/06 11:20:08 by panger           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:38:08 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_colors	light_calc_sph(t_ray ray, t_scene *sc, t_colors cl, t_sphere *sph)
 	rgb[2] = 0;
 	add_coeficient(&rgb, sc->ambient_light->ratio, sc->ambient_light->color);
 	coef = vec_dot(normal, light);
-	if (coef > 0 && light_intersects(create_ray(vec_add(ray.origin, light, EPSILON), light), sc) == 0)
+	if (coef > 0 && light_intersects(create_ray(\
+	vec_add(ray.origin, light, EPSILON), light), sc) == 0)
 	{
 		coef = vec_cos(normal, light) * sc->light->brightness;
 		add_coeficient(&rgb, coef, sc->light->color);
@@ -53,7 +54,8 @@ t_colors	light_calc_cyl(t_ray ray, t_scene *sc, t_colors cl, t_cylinder *cy)
 	rgb[1] = 0;
 	rgb[2] = 0;
 	add_coeficient(&rgb, sc->ambient_light->ratio, sc->ambient_light->color);
-	if (coef > 0 && light_intersects(create_ray(vec_add(ray.origin, light, EPSILON), light), sc) == 0)
+	if (coef > 0 && light_intersects(create_ray(\
+	vec_add(ray.origin, light, EPSILON), light), sc) == 0)
 	{
 		coef = vec_cos(normal, light) * sc->light->brightness;
 		add_coeficient(&rgb, coef, sc->light->color);
@@ -79,7 +81,8 @@ t_colors	light_calc_plane(t_ray ray, t_scene *sc, t_colors cl, t_plane *pl)
 	rgb[1] = 0;
 	rgb[2] = 0;
 	add_coeficient(&rgb, sc->ambient_light->ratio, sc->ambient_light->color);
-	if (coef > 0 && light_intersects(create_ray(vec_add(ray.origin, light, EPSILON), light), sc) == 0)
+	if (coef > 0 && light_intersects(create_ray(\
+	vec_add(ray.origin, light, EPSILON), light), sc) == 0)
 	{
 		coef = vec_cos(normal, light) * sc->light->brightness;
 		add_coeficient(&rgb, coef, sc->light->color);

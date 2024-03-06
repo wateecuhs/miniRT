@@ -6,7 +6,7 @@
 /*   By: dcindrak <dcindrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:28:10 by panger            #+#    #+#             */
-/*   Updated: 2024/02/29 11:20:57 by dcindrak         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:39:21 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	is_alpha(char c)
 	return (0);
 }
 
-int	split_checked(char *str, char *identifier, size_t line)
+int	split_checked(char *str, char **idt, size_t line)
 {
 	int	i;
 	int	ret;
@@ -126,7 +126,7 @@ int	split_checked(char *str, char *identifier, size_t line)
 		if (str[i] == ',')
 			if (str[i + 1] == ',' || !str[i + 1] || str[i + 1] == '\n' || str[i
 					- 1] == ' ' || str[i - 1] == '\t' || ret > 1)
-				return (error_parsing(1, line, identifier), 0);
+				return (error_parsing(1, line, idt[0]), free_arr(idt), 0);
 		i++;
 	}
 	return (1);
